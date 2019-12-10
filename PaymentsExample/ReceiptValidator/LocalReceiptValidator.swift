@@ -22,7 +22,7 @@ public struct LocalReceiptValidator: ReceiptValidatingLocally {
         case .failure(let error): return .failure(.local(.extractionError(error)))
         case .success(let container):
         
-            let verification = verifySignature(in: container, rootCertificate: input.rootCertificateName)
+            let verification = verifySignature(in: container, rootCertificate: input.rootCertificateName, bundle: input.bundle)
             switch verification {
             case .failure(let error): return .failure(.local(.signatureError(.verificationError(error))))
             case .success(let appleRootCertificate):

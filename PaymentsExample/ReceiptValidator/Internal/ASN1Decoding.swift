@@ -46,7 +46,16 @@ struct ASN1 {
     }
     
     static func decode(dateFrom pointer: inout UnsafePointer<UInt8>?, length: Int) -> Date? {
-        fatalError()
+        guard let dateString = ASN1.decode(stringFrom: &pointer, length: length) else { return nil }
+        return ASN1.dateFormatter.date(from: dateString)
+    }
+    
+    private static var dateFormatter: DateFormatter {
+        let df = DateFormatter()
+        df.locale = Locale(identifier: "en_US_POSIX")
+        df.dateFormat = "yyyy'-'MM'-'dd'T'HH':'mm':'ss'Z'"
+        df.timeZone = TimeZone(secondsFromGMT: 0)
+        return df
     }
     
 }

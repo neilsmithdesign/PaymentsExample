@@ -8,26 +8,12 @@
 
 import UIKit
 
-protocol TableViewControllerDataSource: AnyObject {
-    func numberOfSections(_ tableViewController: TableViewController) -> Int
-    func numberOfItems(in section: Int, tableViewController: TableViewController) -> Int
-    func tableViewController(_ tableViewController: TableViewController, itemAt indexPath: IndexPath) -> TableViewItem?
-}
-
-protocol TableViewControllerDelegate: AnyObject {
-    func tableViewController(_ tableViewController: TableViewController, didSelectItemAt indexPath: IndexPath)
-}
-
-struct TableViewItem {
-    let title: String
-    let detail: String
-}
-
 final class TableViewController: UIViewController {
     
     
     // MARK: Interface
     weak var dataSource: TableViewControllerDataSource?
+    
     weak var delegate: TableViewControllerDelegate?
     
     func reload() {

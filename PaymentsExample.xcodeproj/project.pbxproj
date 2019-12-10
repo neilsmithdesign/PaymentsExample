@@ -30,6 +30,10 @@
 		8CF11D2D2390149900496749 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8CF11D2C2390149900496749 /* Assets.xcassets */; };
 		8CF11D302390149900496749 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8CF11D2E2390149900496749 /* LaunchScreen.storyboard */; };
 		8CF11D39239014CB00496749 /* Payments in Frameworks */ = {isa = PBXBuildFile; productRef = 8CF11D38239014CB00496749 /* Payments */; };
+		8CFE76C6239E90D9002D48BE /* TableViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CFE76C5239E90D9002D48BE /* TableViewItem.swift */; };
+		8CFE76C8239E90E9002D48BE /* TableViewControllerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CFE76C7239E90E9002D48BE /* TableViewControllerDataSource.swift */; };
+		8CFE76CA239E90F5002D48BE /* TableViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CFE76C9239E90F5002D48BE /* TableViewControllerDelegate.swift */; };
+		8CFE76CB239EA0A7002D48BE /* AppleIncRootCertificate.cer in Resources */ = {isa = PBXBuildFile; fileRef = 8C2F20E0239A90860020E944 /* AppleIncRootCertificate.cer */; };
 		EB7368E32BB43F8BE95B21EB /* Pods_PaymentsExample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7823B4D3EBA0DD3CD2F48790 /* Pods_PaymentsExample.framework */; };
 /* End PBXBuildFile section */
 
@@ -144,6 +148,9 @@
 		8CF11D2C2390149900496749 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8CF11D2F2390149900496749 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8CF11D312390149900496749 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8CFE76C5239E90D9002D48BE /* TableViewItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewItem.swift; sourceTree = "<group>"; };
+		8CFE76C7239E90E9002D48BE /* TableViewControllerDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewControllerDataSource.swift; sourceTree = "<group>"; };
+		8CFE76C9239E90F5002D48BE /* TableViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewControllerDelegate.swift; sourceTree = "<group>"; };
 		CB01F87FF027141D4FDE60E5 /* Pods-PaymentsExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PaymentsExample.release.xcconfig"; path = "Target Support Files/Pods-PaymentsExample/Pods-PaymentsExample.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -203,6 +210,9 @@
 			isa = PBXGroup;
 			children = (
 				8C1921ED23912A3B00DE2B07 /* TableViewController.swift */,
+				8CFE76C5239E90D9002D48BE /* TableViewItem.swift */,
+				8CFE76C7239E90E9002D48BE /* TableViewControllerDataSource.swift */,
+				8CFE76C9239E90F5002D48BE /* TableViewControllerDelegate.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -299,32 +309,13 @@
 		8C5103C6239A9BAE00B1DC1A /* ReceiptValidator */ = {
 			isa = PBXGroup;
 			children = (
-				8C5103C7239A9BF700B1DC1A /* LocalReceiptValidator */,
+				8C5103D5239A9BF700B1DC1A /* LocalReceiptValidator.swift */,
+				8C5103C9239A9BF700B1DC1A /* Internal */,
 			);
 			path = ReceiptValidator;
 			sourceTree = "<group>";
 		};
-		8C5103C7239A9BF700B1DC1A /* LocalReceiptValidator */ = {
-			isa = PBXGroup;
-			children = (
-				8C5103D5239A9BF700B1DC1A /* LocalReceiptValidator.swift */,
-				8C5103C9239A9BF700B1DC1A /* Internal */,
-			);
-			path = LocalReceiptValidator;
-			sourceTree = "<group>";
-		};
 		8C5103C9239A9BF700B1DC1A /* Internal */ = {
-			isa = PBXGroup;
-			children = (
-				8C5103CA239A9BF700B1DC1A /* PayloadLocation.swift */,
-				8C5103CB239A9BF700B1DC1A /* Functions */,
-				8C5103D2239A9BF700B1DC1A /* ASN1Decoding.swift */,
-				8C5103D3239A9BF700B1DC1A /* UIDevice+Ext.swift */,
-			);
-			path = Internal;
-			sourceTree = "<group>";
-		};
-		8C5103CB239A9BF700B1DC1A /* Functions */ = {
 			isa = PBXGroup;
 			children = (
 				8C5103CC239A9BF700B1DC1A /* InAppReceiptParsing.swift */,
@@ -333,8 +324,11 @@
 				8C5103CF239A9BF700B1DC1A /* SignatureVerification.swift */,
 				8C5103D0239A9BF700B1DC1A /* ReceiptParsing.swift */,
 				8C5103D1239A9BF700B1DC1A /* HashValidating.swift */,
+				8C5103CA239A9BF700B1DC1A /* PayloadLocation.swift */,
+				8C5103D2239A9BF700B1DC1A /* ASN1Decoding.swift */,
+				8C5103D3239A9BF700B1DC1A /* UIDevice+Ext.swift */,
 			);
-			path = Functions;
+			path = Internal;
 			sourceTree = "<group>";
 		};
 		8CF11D172390149800496749 = {
@@ -343,6 +337,7 @@
 				8C5103BF239A9AE500B1DC1A /* pkcs7_union_accessors.h */,
 				8C5103C0239A9B0500B1DC1A /* pkcs7_union_accessors.c */,
 				8C5103C2239A9B5600B1DC1A /* PaymentsExample-Bridging-Header.h */,
+				8C2F20E0239A90860020E944 /* AppleIncRootCertificate.cer */,
 				8CF11D222390149800496749 /* PaymentsExample */,
 				8CF11D212390149800496749 /* Products */,
 				8C1921F323912FFF00DE2B07 /* Frameworks */,
@@ -361,7 +356,6 @@
 		8CF11D222390149800496749 /* PaymentsExample */ = {
 			isa = PBXGroup;
 			children = (
-				8C2F20E0239A90860020E944 /* AppleIncRootCertificate.cer */,
 				8CF11D232390149800496749 /* AppDelegate.swift */,
 				8CF11D252390149800496749 /* SceneDelegate.swift */,
 				8C2F20DE239A8FF00020E944 /* Constants.swift */,
@@ -442,6 +436,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8CFE76CB239EA0A7002D48BE /* AppleIncRootCertificate.cer in Resources */,
 				8CF11D302390149900496749 /* LaunchScreen.storyboard in Resources */,
 				8CF11D2D2390149900496749 /* Assets.xcassets in Resources */,
 			);
@@ -484,9 +479,12 @@
 				8CF11D242390149800496749 /* AppDelegate.swift in Sources */,
 				8C5103DB239A9BF700B1DC1A /* SignatureVerification.swift in Sources */,
 				8C1921EE23912A3B00DE2B07 /* TableViewController.swift in Sources */,
+				8CFE76C6239E90D9002D48BE /* TableViewItem.swift in Sources */,
 				8C5103DF239A9BF700B1DC1A /* UIDevice+Ext.swift in Sources */,
 				8C5103D7239A9BF700B1DC1A /* PayloadLocation.swift in Sources */,
+				8CFE76C8239E90E9002D48BE /* TableViewControllerDataSource.swift in Sources */,
 				8C5103DD239A9BF700B1DC1A /* HashValidating.swift in Sources */,
+				8CFE76CA239E90F5002D48BE /* TableViewControllerDelegate.swift in Sources */,
 				8C44D4F0239943F90091ABC7 /* ExampleStoreTableData.swift in Sources */,
 				8C5103D9239A9BF700B1DC1A /* SignatureAuthentication.swift in Sources */,
 				8C2F20DF239A8FF00020E944 /* Constants.swift in Sources */,
@@ -714,7 +712,7 @@
 			repositoryURL = "https://github.com/neilsmithdesign/Payments.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 0.1.6;
+				minimumVersion = 0.2.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */

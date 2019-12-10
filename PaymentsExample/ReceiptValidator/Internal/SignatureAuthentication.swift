@@ -17,8 +17,8 @@ func verifySignatureAuthenticity(in container: ReceiptContainer, against rootCer
     OpenSSL_add_all_digests()
     let result = PKCS7_verify(container, nil, certificateStore, nil, nil, 0)
     switch result {
-    case 1: return .failure(.invalid)
-    default: return .success(rootCertificate)
+    case 1: return .success(rootCertificate)
+    default: return .failure(.invalid)
     }
     
 }

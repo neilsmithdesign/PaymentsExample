@@ -89,7 +89,7 @@ func parsedReceipt(from container: ReceiptContainer) -> ReceiptParsingResult {
             var startOfInAppPurchaseReceipt = currentPayloadLocation
             let result = parsedInAppPurchaseReceipt(currentPayloadLocation: &startOfInAppPurchaseReceipt, payloadLength: length)
             switch result {
-            case .success(let iapReceipt): inAppPurchaseReceipts.append(iapReceipt)
+            case .success(let iapReceipt): inAppPurchaseReceipts.append(contentsOf: iapReceipt)
             case .failure: return .failure(.malformed(.inAppPurchaseReceipt))
             }
         case 12:
@@ -108,8 +108,14 @@ func parsedReceipt(from container: ReceiptContainer) -> ReceiptParsingResult {
         currentPayloadLocation = currentPayloadLocation?.advanced(by: length)
     }
 
-    guard let bundleID = bundleIdentifier, let current = appVersion, let original = originalAppVersion, let sha1 = sha1Hash, let opaque = opaqueValue, let creationDate = receiptCreationDate else {
-        return .failure(.malformed(.inAppPurchaseReceipt))
+    guard
+        let bundleID = bundleIdentifier,
+        let current = appVersion,
+        let original = originalAppVersion,
+        let sha1 = sha1Hash,
+        let opaque = opaqueValue,
+        let creationDate = receiptCreationDate else {
+            return .failure(.malformed(.inAppPurchaseReceipt))
     }
     
     let receipt = AppStoreReceipt(

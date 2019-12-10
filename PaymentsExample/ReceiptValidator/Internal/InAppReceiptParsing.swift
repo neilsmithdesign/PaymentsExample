@@ -8,7 +8,7 @@
 import Foundation
 import Payments
 
-typealias InAppPurchaseReceiptParsingResult = Result<InAppPurchaseReceipt, ReceiptParsingError>
+typealias InAppPurchaseReceiptParsingResult = Result<[InAppPurchaseReceipt], ReceiptParsingError>
 
 func parsedInAppPurchaseReceipt(currentPayloadLocation: inout PayloadLocation?, payloadLength: Int) -> InAppPurchaseReceiptParsingResult {
     
@@ -18,9 +18,10 @@ func parsedInAppPurchaseReceipt(currentPayloadLocation: inout PayloadLocation?, 
     var originalTransactionId: String?
     var purchaseDate: Date?
     var originalPurchaseDate: Date?
-//    var subscriptionExpirationDate: Date?
-//    var cancellationDate: Date?
+    var subscriptionExpirationDate: Date?
     var webOrderLineItemId: Int?
+    var cancellationDate: Date?
+    var isIntroductoryPeriod: Bool?
     
     let endOfPayload = currentPayloadLocation!.advanced(by: payloadLength)
     var type = Int32(0)
@@ -50,7 +51,7 @@ func parsedInAppPurchaseReceipt(currentPayloadLocation: inout PayloadLocation?, 
         guard let attributeTypeValue = ASN1.decode(integerFrom: &currentPayloadLocation, length: currentPayloadLocation!.distance(to: endOfPayload)) else {
             return .failure(.malformed(.inAppPurchaseReceipt))
         }
-        
+            
         // Attribute version of ASN1 Sequence must be an Integer
         guard ASN1.decode(integerFrom: &currentPayloadLocation, length: currentPayloadLocation!.distance(to: endOfPayload)) != nil else {
             return .failure(.malformed(.inAppPurchaseReceipt))
@@ -65,7 +66,7 @@ func parsedInAppPurchaseReceipt(currentPayloadLocation: inout PayloadLocation?, 
         }
         
         guard let attribute = InAppPurchaseReceipt.Keys.init(asn1Field: attributeTypeValue) else {
-            return .failure(.malformed(.inAppPurchaseReceipt))
+            break
         }
         
         // Decode attributes
@@ -88,15 +89,20 @@ func parsedInAppPurchaseReceipt(currentPayloadLocation: inout PayloadLocation?, 
         case .originalPurchaseDate:
             var startOfOriginalPurchaseDate = currentPayloadLocation
             originalPurchaseDate = ASN1.decode(dateFrom: &startOfOriginalPurchaseDate, length: length)
-//        case .subscriptionExpirationDate:
-//            var startOfSubscriptionExpirationDate = currentPayloadLocation
-//            subscriptionExpirationDate = ASN1.decode(dateFrom: &startOfSubscriptionExpirationDate, length: length)
-//        case .cancellationDate:
-//            var startOfCancellationDate = currentPayloadLocation
-//            cancellationDate = ASN1.decode(dateFrom: &startOfCancellationDate, length: length)
+        case .subscriptionExpirationDate:
+            var startOfSubscriptionExpirationDate = currentPayloadLocation
+            subscriptionExpirationDate = ASN1.decode(dateFrom: &startOfSubscriptionExpirationDate, length: length)
         case .webOrderLineItem:
             var startOfWebOrderLineItemId = currentPayloadLocation
             webOrderLineItemId = ASN1.decode(integerFrom: &startOfWebOrderLineItemId, length: length)
+        case .cancellationDate:
+            var startOfCancellationDate = currentPayloadLocation
+            cancellationDate = ASN1.decode(dateFrom: &startOfCancellationDate, length: length)
+        case .isIntroductoryPeriod:
+            var startOfIsIntroductoryPeriod = currentPayloadLocation
+            if let string = ASN1.decode(stringFrom: &startOfIsIntroductoryPeriod, length: length) {
+                isIntroductoryPeriod = Bool(string)
+            }
         default:
             break
         }
@@ -117,7 +123,7 @@ func parsedInAppPurchaseReceipt(currentPayloadLocation: inout PayloadLocation?, 
         let pd = purchaseDate,
         let opd = originalPurchaseDate
         else {
-            return .failure(.malformed(.inAppPurchaseReceipt))
+            return .success([])
     }
     
     let receipt = InAppPurchaseReceipt(
@@ -128,7 +134,7 @@ func parsedInAppPurchaseReceipt(currentPayloadLocation: inout PayloadLocation?, 
         subscription: nil
     )
     
-    return .success(receipt)
+    return .success([receipt])
     
 }
 
