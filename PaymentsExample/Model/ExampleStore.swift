@@ -102,13 +102,13 @@ extension ExampleStore {
 extension ExampleStore: PaymentsObserving {
     
     private func setupObservationOfPaymentEvents() {
-        appStore.add(observer: self, forPaymentEvent: .loadProductsSucceeded, selector: #selector(handleLoadProducts))
-        appStore.add(observer: self, forPaymentEvent: .loadProductsFailed, selector: #selector(handleLoadProducts))
-        appStore.add(observer: self, forPaymentEvent: .cannotMakePayments, selector: #selector(handleCannotMakePayments))
-        appStore.add(observer: self, forPaymentEvent: .paymentCompletedSuccessfully, selector: #selector(handlePayment))
-        appStore.add(observer: self, forPaymentEvent: .paymentFailed, selector: #selector(handlePayment))
-        appStore.add(observer: self, forPaymentEvent: .paymentRestoredSuccessfully, selector: #selector(handlePayment))
-        appStore.add(observer: self, forPaymentEvent: .paymentDeferred, selector: #selector(handlePayment))
+        AppStore.add(observer: self, forPaymentEvent: .loadProductsSucceeded, selector: #selector(handleLoadProducts))
+        AppStore.add(observer: self, forPaymentEvent: .loadProductsFailed, selector: #selector(handleLoadProducts))
+        AppStore.add(observer: self, forPaymentEvent: .cannotMakePayments, selector: #selector(handleCannotMakePayments))
+        AppStore.add(observer: self, forPaymentEvent: .paymentCompletedSuccessfully, selector: #selector(handlePayment))
+        AppStore.add(observer: self, forPaymentEvent: .paymentFailed, selector: #selector(handlePayment))
+        AppStore.add(observer: self, forPaymentEvent: .paymentRestoredSuccessfully, selector: #selector(handlePayment))
+        AppStore.add(observer: self, forPaymentEvent: .paymentDeferred, selector: #selector(handlePayment))
     }
     
     
