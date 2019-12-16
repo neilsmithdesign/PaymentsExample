@@ -1,6 +1,8 @@
 #  Payments Example
 
-This project illustrates the use of [this library](https://github.com/neilsmithdesign/Payments) for handling StoreKit transactions. Specifically, local receipt validation.
+This project illustrates the use of [this library](https://github.com/neilsmithdesign/Payments) for handling StoreKit transactions. Specifically, local receipt validation. 
+
+A lot of my own knowledge was gained from [this excellent series of blog posts](https://www.andrewcbancroft.com/2017/08/01/local-receipt-validation-swift-start-finish/) from [Andrew Bancroft](https://twitter.com/andrewcbancroft).
 
 ## Disclaimer
 
